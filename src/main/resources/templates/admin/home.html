@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <main class="overflow-auto gap-1 row col-sm-10 m-auto" th:fragment="adminHome">
+        <div class="card p-0 rounded-0 mb-3 col-sm-6 border-0 " style="max-width:540px;border-color:transparent" >
+            <div class="row g-0">
+                <div class="col-sm-4 card rounded-0 p-0" style="display:flex;justify-content:center;align-items:center">
+                    <i class="display-1 bi bi-people-fill"></i>
+                </div>
+                <div class="col-sm-8 card rounded-0 bg-primary p-0">
+                <div class="card-body">
+                        <h5 class="card-title">User</h5>
+                        <p class="card-text">
+                            <i class="rounded-pill fs-4 bg-success text-white  py-1 px-2 bi bi-people-fill"></i> 
+                            <span class="fw-bolder text-bg-success p-1 rounded-2 border border-light mx-2"> <span
+                                class="badge bg-light text-dark fw-bolder"
+                                th:text="${userList.size()}"></span> users 
+                            </span>
+                        </p>
+                        <p class="card-text">
+                            <i class="rounded-pill border fs-4 bg-primary text-white py-1 px-2 bi bi-hospital-fill"></i>
+                            <span class="fw-bolder text-bg-success p-1 rounded-2 border border-light mx-2"> <span
+                                class="badge bg-light text-dark fw-bolder"
+                                th:text="${hospitalList.size()}"></span> Hosptals 
+                            </span>
+                        </p>
+                        
+                        <p class="card-text">
+                            <small class="text-muted"
+                                >Last updated 3 mins ago</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card p-0 rounded-0 mb-3 col-sm-6 border-0 " style="max-width: 540px;border-color:transparent" >
+            <div class="row g-0">
+                <div class="col-sm-4 card rounded-0 p-0" style="display:flex;justify-content:center;align-items:center">
+                    <i class="display-1 bi bi-hospital"></i>
+                </div>
+                <div class="col-sm-8 card rounded-0 bg-info p-0">
+                    <div class="card-body">
+                        <h5 class="card-title">Hospital</h5>
+                        <p class="card-text">
+                            <i class="rounded-pill fs-4 bg-success text-white  py-1 px-2 bi bi-hospital-fill"></i> 
+                            <span class="fw-bolder text-bg-success p-1 rounded-2 border border-light mx-2"> <span
+                                class="badge bg-light text-dark fw-bolder"
+                                th:text="${hospitalList.size()}"></span> Hosptals 
+                            </span>
+                        </p>
+                        <p class="card-text">
+                            <i class="rounded-pill fs-4 bg-primary text-white py-1 px-2 bi bi-truck"></i>
+                            <span class="fw-bolder text-bg-info p-1 rounded-2 border border-light mx-2"> <span
+                                class="badge bg-light text-dark fw-bolder"
+                                th:text="${hospitalList.size()}"></span> Ambulances 
+                            </span>
+                        </p>
+                        
+                        <p class="card-text">
+                            <small class="text-muted"
+                                >Last updated 3 mins ago</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </main> 
+</body>
+</html>

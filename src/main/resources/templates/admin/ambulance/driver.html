@@ -1,0 +1,20 @@
+<section class="container bg-light mb-5" th:fragment="driver">
+    <span class="display-5 d-block fw-bold text-center py-2"><i class="bi bi-car-front"></i> Available ambulance</span>
+    <a href="/admin/ambulance" class="btn btn-outline-primary">Add ambulance<i class="bi bi-plus"></i></a>
+    <section class="row col-12 g-1 p-5">
+        <div class="card col-sm-4 m-auto p-0" th:each="ambulance:${ambulanceList}">
+                <h6 class="card-title p-4 text-center display-6">
+                  <i class="bi bi-car-front "></i> <span th:text="${ambulance.plateNumber}"></span>
+                </h6>
+                <section class="col-sm-12">   
+                    <p class="card-text"><b>Brand name : </b><span th:text="${ambulance.model}"></span></p>
+                    <p class="card-text"><b>Drivers </b> <span th:text="${ambulance.listOfDriver.size()}"></span></p> 
+                    <p class="card-text"><b>Hospital </b> <span th:text="${ambulance.hospital.name}"></span></p>
+                </section>
+                <p class="card-text modal-footer p-2">
+                  <a th:href="@{'/admin/delete/'+${ambulance.id}}" class="btn rounded-pill btn-outline-danger"><i class="bi bi-trash"></i></a>
+                  <a th:href="@{'/admin/driver/'+${ambulance.id}}" class="btn rounded-pill btn-outline-primary"><i class="bi bi-person-fill-add"></i></a> 
+                </p>
+        </div>
+    </section>
+</section>

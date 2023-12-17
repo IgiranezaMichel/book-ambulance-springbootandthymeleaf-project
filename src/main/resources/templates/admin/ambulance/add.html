@@ -1,0 +1,48 @@
+<head th:replace="index::head"></head>
+<div class="fixed-top h-100 bg-primary overflow-auto d-flex justify-content-center align-items-center">
+    <section class="container mb-5">
+        <section class="col-12 gap-5 p-5">
+            <div class="card col-sm-6 m-auto p-0">
+                <div class="card-body">
+                    <h1 class="card-title text-center">
+                        <i class="bi bi-car-front display-2"></i>
+                    </h1>
+                    <form action="/admin/ambulance" method="post" th:object="${ambulance}" class=" col-sm-12">
+                        <div
+                            class="alert alert-primary alert-dismissible fade show"
+                            role="alert" th:if="${!message.equals('')}"
+                        >
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"
+                            ></button>
+                        
+                            <strong th:text="${message}"></strong>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="input1" class="form-label">PlateNumber</label>
+                            <input type="text" class="form-control" name="plateNumber" placeholder="add car model ..." aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                          <label for="input1" class="form-label">Model</label>
+                          <input type="text" class="form-control" name="model" placeholder="add car model ..." aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                          <select class="col-sm-12 w-100 p-2" aria-label="Default select example" name="hospital" required>
+                            <option value="">select Hospital</option>
+                            <option th:each="hospital:${hospitalList}" th:value="${hospital.id}" th:text="${hospital.name}"></option>
+                          </select>
+                        </div>
+                        <p class="modal-footer">
+                            <a href="/admin" class="btn btn-outline-danger">Cancel</a>
+                            <button class="btn btn-outline-primary" type="submit">Submit</button> 
+                          </p>
+                    </form> 
+                </div>
+            </div>
+        </section>
+    </section>
+</div>

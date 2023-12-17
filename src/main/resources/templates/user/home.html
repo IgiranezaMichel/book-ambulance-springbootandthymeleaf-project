@@ -1,0 +1,47 @@
+<head th:replace="index::head"></head>
+<main class="container row m-auto gap-1" th:fragment="home">
+    <section class=" p-0 rounded-0 mb-3 col-sm-5 border-0 " style="border-color:'transparent" >
+        <div class="row g-0">
+            <div class="col-sm-4 card rounded-0 p-0 justify-content-center align-items-center">
+                <i class="display-1 bi bi-people-fill"></i>
+            </div>
+            <div class="col-sm-8  rounded-0 bg-primary p-0">
+                <div class="card-body">
+                    <h5 class="card-title">Booking status</h5>
+                    <p class="card-text">
+                        <i class="rounded-pill fs-4 bg-success text-white  py-1 px-2 bi bi-people-fill"></i>
+                        <span class="fw-bolder text-bg-success p-1 rounded-2 mx-3"> 
+                            <span class="badge bg-light text-dark fw-bolder"> 3</span>People Remain 
+                        </span>
+                    </p>
+                    <p class="card-text">
+                        <a th:href="@{'/user/'+${user.id}}" >
+                            <button class="text-bg-dark p-2 rounded-2 nav-item fw-bolder">Book now <i class="bi bi-plus rounded bg-light text-dark px-1 rounded-pill" aria-hidden="true"></i> </button>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="col-sm-6">
+        <div class="table-responsive  m-auto">
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th colSpan="2" class="bg-primary"><span class="display-6">Booking List</span></th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Car plate number</th>
+                        <th scope="col">Booking Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="userbooking:${userBooking}">
+                        <td scope="row" th:text="${userbooking.bookingDate}">R1C1</td>
+                        <td>R1C2</td>
+                    </tr>
+                </tbody>
+                    </table>
+        </div>
+    </section>
+</main>
