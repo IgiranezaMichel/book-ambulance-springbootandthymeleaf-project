@@ -16,12 +16,8 @@ import com.bookambulance.Model.User;
 import com.bookambulance.Services.BookingServices;
 import com.bookambulance.Services.HospitalServices;
 import com.bookambulance.Services.UserServices;
-
-import lombok.extern.slf4j.Slf4j;
-
 @Controller
 @SessionAttributes({"user"})
-@Slf4j
 public class UserController {
 private String message="";
 @Autowired private UserServices userServices;
