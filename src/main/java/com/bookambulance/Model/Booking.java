@@ -10,9 +10,11 @@ import lombok.*;
 public class Booking {
     @Id  @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
     private User user;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
     private Hospital hospital;
+    private boolean isCanceled;
+    private boolean isDone;
     private LocalDateTime bookingDate=LocalDateTime.now();
 }
