@@ -1,7 +1,9 @@
 package com.bookambulance.Controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bookambulance.Model.Booking;
@@ -23,7 +26,10 @@ private String message="";
 @Autowired private UserServices userServices;
 @Autowired private HospitalServices hospitalServices;
 @Autowired private BookingServices bookingServices;
-private static User user1;
+private static  User user1;
+public static void setUser(User user){
+user1=user;
+}
 @GetMapping(value = "/signup")
 public String signupPage(Model model){
   model.addAttribute("message", message);
@@ -31,24 +37,26 @@ public String signupPage(Model model){
   message="";
     return "signup";
 }
+@RequestMapping(value = "/login")
+public String loginPage(){
+    return "login";
+}
 @GetMapping(value = "/user")
 public String userHomePage(Model model){
   model.addAttribute("message", message);
-  user1=userServices.findById(Long.parseLong("1"));
-  List<Booking>bookingList=bookingServices.ListOfUserBookings(user1);
-   for(Booking booking:bookingList)
-   {
-      System.out.println(booking.getHospital().getName());
-   }
+  List<Booking>AllbookingList=bookingServices.ListOfUserBookings(user1);
+  List<Booking>bookingList=AllbookingList.stream().filter(user->!user.isCanceled()).collect(Collectors.toList());
   model.addAttribute("userBooking", bookingList);
+  model.addAttribute("userBookingHistory", AllbookingList);
   model.addAttribute("booking", new Booking());
-  model.addAttribute("user", userServices.findById(Long.parseLong("1")));
+  model.addAttribute("user", user1);
   message="";
     return "user/index";
 }
 @PostMapping(value = "/signup") public String addUser(@ModelAttribute User userinput)
 {   try {
-  userinput.setRole("USER");
+  userinput.setRole("ROLE_USER");
+  userinput.setPassword(BCrypt.hashpw(userinput.getPassword(), BCrypt.gensalt()));
  User user= userServices.saveOrUpdateData(userinput);
  message=user.getName()+" Saved successfull";
 } catch (Exception e) {
@@ -71,12 +79,7 @@ return "redirect:/signup";
     }
     
     }
-    @PostMapping(value = "/user/booking")
-public String addOrUpdateBooking(@ModelAttribute Booking bookingInput){
-      Booking booking=bookingServices.saveOrUpdateData(bookingInput);
-      message=booking.getUser().getName()+" Booking saved successfully";
-      return "redirect:/user/"+booking.getUser().getId();
-}
+   
 @PostMapping(value = "user/:id") public String deleteUser(@PathVariable long id){
   try {
     User user=userServices.findById(id);
