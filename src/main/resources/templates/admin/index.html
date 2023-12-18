@@ -8,15 +8,7 @@
             <a class="navbar-brand mx-2" href='/'>
                 <img  th:src="@{'img/icon/hospital.png'}" width=100 alt="" />
             </a>
-            <button
-                class="navbar-toggler d-lg-none"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapsibleNavId"
-                aria-controls="collapsibleNavId"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            ></button>
+            <button class="navbar-toggler d-lg-none"  type="button"   data-bs-toggle="collapse"  data-bs-target="#collapsibleNavId"  aria-controls="collapsibleNavId"  aria-expanded="false" aria-label="Toggle navigation"></button>
             <div class="collapse navbar-collapse container" id="collapsibleNavId">
                 <ul class="navbar-nav me-auto mt-2 mt-lg-0">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -42,28 +34,14 @@
           </li>
         </ul>
         </ul>
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                   <i class="bi bi-person display-5"></i>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><Link class="dropdown-item" to={'/'}>Admin</Link></li>
-                    <li><Link class="dropdown-item" to={'/'}>Logout</Link></li>
-                  </ul>
-                </div>
+          <form th:action="@{'/logout'}" method="post">
+            <button type="submit" class="bg-transparent border-0"><i class="bi bi-box-arrow-in-left btn btn-secondary mx-3"></i></button>
+          </form>
             </div>
         </nav>
         <main>
-          <div
-            class="alert alert-primary alert-dismissible fade show"
-            role="alert" th:if="${!message.equals('')}"
-          >
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
+          <div  class="alert alert-primary alert-dismissible fade show"  role="alert" th:if="${!message.equals('')}" >
+            <button  type="button"  class="btn-close"  data-bs-dismiss="alert"  aria-label="Close"></button>
             <strong th:text="${message}">Alert Heading</strong>
           </div>    
         <div class="tab-content overflow-auto" id="pills-tabContent">
@@ -74,7 +52,7 @@
             <div th:replace="admin/hospital/hospital::adminHospitalHome"></div>
           </div>
           <div class="tab-pane fade show" id="pills-setting" role="tabpanel" aria-labelledby="pills-setting-tab">
-            <div th:replace="admin/ambulance/driver::driver"></div>
+            <div th:replace="admin/ambulance/ambulanceList::driver"></div>
           </div>
           <div class="tab-pane fade" id="pills-user-tab" role="tabpanel" aria-labelledby="pills-contact-tab">
             <div th:replace="admin/user/userList::userList"></div>
