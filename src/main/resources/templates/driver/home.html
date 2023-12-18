@@ -1,0 +1,66 @@
+<main class="container" th:fragment="bookingList">
+    <div class="card p-0 rounded-0 mb-3 col-sm-6 border-0 " style="max-width: 540px;border-color:transparent" >
+            <div class="row g-0">
+                <div class="col-sm-4 card rounded-0 p-0" style="display:flex;justify-content:center;align-items:center">
+                    <i class="display-1 bi bi-people-fill"></i>
+                </div>
+                <div class="col-sm-8 card rounded-0 bg-primary p-0">
+                <div class="card-body">
+                        <h5 class="card-title text-light text-bg-dark text-center p-2 rounded-5"><span th:text="${user.ambulance.hospital.name}"></span> Driver</h5>
+                        <p class="card-text">
+                            <i class="rounded-pill fs-4 bg-success text-white  py-1 px-2 bi bi-truck"></i>
+                            <span class="fw-bolder text-bg-success p-1 rounded-2 border border-light mx-2"> <span
+                                class="badge bg-light text-dark fw-bolder"
+                                th:text="${user.ambulance.plateNumber}"></span> <span th:text="${user.ambulance.model}"></span> 
+                            </span>
+                        </p>
+                        <p class="card-text">
+                            <i class="rounded-pill fs-4 bg-success text-white  py-1 px-2 bi bi-people-fill"></i>
+                            <span class="fw-bolder text-bg-success p-1 rounded-2 border border-light mx-2"> <span
+                                class="badge bg-light text-dark fw-bolder"
+                                 th:text="${bookingList.size()}"></span> Remaining bookings 
+                            </span>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-light"
+                                >Last updated 3 mins ago</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-primary">
+                <thead>
+                    <tr>
+                        <th colSpan="4" class="p-3 bg-primary">
+                            <span class="d-block text-center fs-3">List of Bookings</span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Contacts</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="" th:each="booking, loopStatus : ${bookingList}">
+                        <td th:text="${loopStatus.index + 1}"></td>
+                        <td scope="row"><i class="bi bi-person"></i> <span th:text="${booking.user.name}"></span></td>
+                        <td>
+                            <span class="d-block"><i class="bi bi-envelope"></i> <span th:text="${booking.user.email}"></span></span>
+                            <i class="bi bi-phone"></i> <span th:text="${booking.user.phoneNumber}"></span>
+                        </td>
+                        <td >
+                            <div th:if="${loopStatus.index==0}">
+                                <a th:href="@{'/driver/booking/'+${booking.id}}" class="rounded-pill fs-4 bg-success text-white py-1 px-2 bi bi-check"></a>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+                
+    </main>
