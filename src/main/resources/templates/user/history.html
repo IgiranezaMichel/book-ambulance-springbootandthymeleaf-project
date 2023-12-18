@@ -1,0 +1,41 @@
+<head th:replace="index::head"></head>
+<main class="container  m-auto " th:fragment="home">
+    
+    <section >
+        <div class="table-responsive  m-auto">
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th colSpan="4" class="bg-primary"><span class="display-6">Booking History List</span></th>
+                    </tr>
+                    <tr>
+                        
+                        <th scope="col">Hospital</th>
+                        <th scope="col">Ambulance_Detail</th>
+                        <th scope="col">Booking Date</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="userbooking:${userBookingHistory}">
+                        <td scope="row" th:text="${userbooking.hospital.name}">R1C1</td>
+                        <td scope="row" >
+                            <div th:each="ambulance:${userbooking.hospital.ambulanceList}">
+                                <div th:text="${ambulance.plateNumber}"></div>
+                                <div th:each="driver:${ambulance.listOfDriver}">
+                                    <span th:text="${driver.phoneNumber}"></span>
+                                </div>
+                            </div>
+                        </td>
+                        <td th:text="${userbooking.bookingDate}"></td>
+                        <td scope="row" >
+                            <div th:if="${userbooking.isDone}">Complete</div>
+                            <div th:if="${!(userbooking.isDone)&&!(userbooking.isCanceled)}">appending</div>
+                            <div th:if="${!(userbooking.isDone)&&(userbooking.isCanceled)}">Canceled</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
