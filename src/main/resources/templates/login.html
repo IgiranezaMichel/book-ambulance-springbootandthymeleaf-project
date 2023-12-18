@@ -16,23 +16,31 @@
                         <a href='/signup' class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill">SignUp</a>
                     </section>
                     <section class="col-lg-6">
-                        <div class="bg-white border  text-dark  mt-lg-5">
+                        <form action="/login" method="post" class="bg-white border  text-dark  mt-lg-5">
                             <span class="bi bi-person d-block text-center display-6 mt-3"></span>
                             <nav class="card-title border-bottom fw-bolder text-center fs-3 p-3">Login</nav>
+                            <div class="alert alert-light alert-dismissible fade show"  role="alert" th:if="${param.error}">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <strong>Wrong credentials</strong>
+                            </div>
+                            <div class="alert alert-info alert-dismissible fade show" role="alert" th:if="${param.logout}">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+                                <strong>You've logged out sucessfully</strong> 
+                            </div>
                             <section class='p-4'>
                                 <div class="mb-3">
                                     <span  class="form-span">Email</span>
-                                    <input type="email"   class="form-control rounded-0" placeholder="example@gmail.com" />
+                                    <input type="username"  name="username" class="form-control rounded-0" placeholder="example@gmail.com" />
                                 </div>
                                 <div class="mb-3">
                                     <span  class="form-span">Password</span>
-                                    <input type="password"   class="form-control rounded-0" placeholder="Enter password" />
+                                    <input type="password" name="password"  class="form-control rounded-0" placeholder="Enter password" />
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit"   class="btn btn-outline-success fw-bolder">Submit</button>
                                 </div>
                             </section>
-                        </div>
+                        </form>
                     </section>
                 </div>
             </div>
