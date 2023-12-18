@@ -35,6 +35,10 @@ public List<Location> getAllData() {
 public List<Location> getAllProvinces() {
     return locationRepository.findByType("PROVINCE");
 }
+
+public List<Location> findByLocationType(String string) {
+    return locationRepository.findByType(string);
+}
     
 
 }
