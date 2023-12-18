@@ -30,14 +30,6 @@
                         ></button>
                         <strong th:text="${message}"></strong>
                       </div>
-                      
-                      <script>
-                        var alertList = document.querySelectorAll(".alert");
-                        alertList.forEach(function (alert) {
-                            new bootstrap.Alert(alert);
-                        });
-                      </script>
-                      
                       <section class='p-4'>
                           <div class="mb-3">
                             <span  class="form-span text-white">Name</span>
@@ -45,7 +37,7 @@
                           </div>
                           <div class="mb-3">
                               <span class='text-white'>Select Gender</span>
-                              <select class="form-select"   required name="gender">
+                              <select class="form-select w-100"   required name="gender">
                                   <option value="">--Select gender--</option>
                                   <option value="Male">Male</option>
                                   <option value="Female">Female</option>
