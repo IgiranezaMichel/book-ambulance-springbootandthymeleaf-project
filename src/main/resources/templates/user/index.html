@@ -31,35 +31,27 @@
             <img src="/img/parchment.png" width="70" alt="" />
             </button>
           </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-a hover-me" id="pills-setting-tab" data-bs-toggle="pill" data-bs-target="#pills-setting" type="button" role="tab" aria-controls="pills-setting" aria-selected="false">
-            <i class="bi bi-gear-fill display-6"></i>
-            </button>
-          </li>
         </ul>
         </ul>
+        <div><i class="bi bi-person-fill text-white"></i> <span th:text="${user.name}" class="text-white fw-bolder"></span></div>
                 <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                   <i class="bi bi-person display-5"></i>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="/">Admin</a></li>
-                    <li><a class="dropdown-item" href="/">Logout</a></li>
-                  </ul>
+                    <form th:action="@{'/logout'}" method="post">
+                        <button type="submit" class="bg-transparent border-0"><i class="bi bi-box-arrow-in-left btn btn-secondary mx-3"></i></button>
+                    </form>
+                  <!-- <a  class="btn btn-secondary mx-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    
+                  </a> -->
                 </div>
             </div>
         </nav>
-        <main>
-        <div class="tab-content overflow-auto" id="pills-tabContent">
-          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-            <div th:replace="user/home::home"></div>
-          </div>
-          <div class="tab-pane fade" id="hospital" role="tabpanel" aria-labelledby="hospital-tab">
-             <UserHistory/>
-          </div>
-          <div class="tab-pane fade show" id="pills-setting" role="tabpanel" aria-labelledby="pills-setting-tab">
-             <Settings/>
-          </div>
-        </div>
-        </main>
+        <section>
+            <div class="tab-content overflow-auto" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div th:replace="user/home::home"></div>
+            </div>
+            <div class="tab-pane fade" id="hospital" role="tabpanel" aria-labelledby="hospital-tab">
+                <div th:replace="user/history::home"></div>
+            </div>
+            </div>
+        </section>
 </main>
