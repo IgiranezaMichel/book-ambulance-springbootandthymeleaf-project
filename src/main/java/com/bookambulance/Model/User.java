@@ -19,8 +19,8 @@ private String phoneNumber;
 private String email;
 private String password;
 private String role;
-@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+@ManyToOne(cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
 private Ambulance ambulance;
-@OneToMany(mappedBy="user")
+@OneToMany(mappedBy="user",cascade = CascadeType.REMOVE)
 private List<Booking> userBookingList;
 }
