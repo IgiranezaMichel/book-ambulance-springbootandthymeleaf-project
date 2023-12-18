@@ -20,8 +20,11 @@ import com.bookambulance.Services.LocationServices;
 public class HospitalController {
 @Autowired private HospitalServices hospitalServices;
 @Autowired private LocationServices locationServices;
+private String message="";
 @GetMapping(value = "/add") public  String getHospitalById(Model model)
 {   model.addAttribute("hospital", new Hospital());
+    model.addAttribute("message", message);
+    model.addAttribute("provinceList", locationServices.findByLocationType("PROVINCE"));
     return "admin/hospital/add";
 }
 @GetMapping(value = "/hospital/:id") public  String getHospitalById(@PathVariable long id)
@@ -32,9 +35,10 @@ public class HospitalController {
 {
     return hospitalServices.getAllData();
 }
-@PostMapping(value = "/add") public Hospital addHospital(@ModelAttribute()Hospital HospitalInput)
-{   HospitalInput.setLocation(locationServices.findById(HospitalInput.getId()));
-    return hospitalServices.saveOrUpdateData(HospitalInput);
+@PostMapping(value = "/add") public String addHospital(@ModelAttribute()Hospital HospitalInput)
+{  Hospital hospital=hospitalServices.saveOrUpdateData(HospitalInput);
+    message=hospital.getName()+" Added succefully";
+    return "redirect:/hospital/add";
 }
 
 @PostMapping(value = "/:id") public String deleteHospital(@PathVariable long id){
