@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bookambulance.Interfaces.DataInterface;
 import com.bookambulance.Model.Booking;
+import com.bookambulance.Model.Hospital;
 import com.bookambulance.Model.User;
 import com.bookambulance.Repository.BookingRepository;
 @Service
@@ -33,5 +34,9 @@ public class BookingServices implements DataInterface<Booking,Long>{
    public List<Booking>ListOfUserBookings(User user){
       return bookingRepo.findByUser(user);
    }
+
+public Hospital findByHospital(Hospital hospital) {
+   return bookingRepo.findByHospital(hospital);
+}
 
 }
