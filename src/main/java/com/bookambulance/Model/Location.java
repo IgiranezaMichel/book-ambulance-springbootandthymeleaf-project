@@ -1,6 +1,9 @@
 package com.bookambulance.Model;
 
 import java.util.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 @Entity
@@ -14,10 +17,13 @@ public class Location {
 private long id;
 private String name;
 private String type;
+@JsonIgnore
 @ManyToOne
 private Location location;
+@JsonIgnore
 @OneToMany(mappedBy = "location")
 private List<Hospital>hospitalLocation;
+@JsonIgnore
 @OneToMany(mappedBy = "location")
 private List<Location>locationList;
 public Location(String name2, String type2,Location location) {
