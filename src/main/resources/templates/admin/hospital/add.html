@@ -1,4 +1,5 @@
 <head th:replace="index::head"></head>
+<script th:src="@{'../main.js'}"></script>
 <div class="card  text-white fixed-top border-0" style="height:100dvh">
     <img class="card-img rounded-0" src="/img/visitor/authentication.png" alt="Title" />
     <div class="card-img-overlay overflow-auto" style="display:'flex';justify-content:center;align-items:center;background-color:rgb(0,0,0,0.7)">
@@ -7,29 +8,29 @@
                <img width="60"src="/img/admin/hospital-location.png" alt="" />Add Hospital
             </h4>
                <i class="rounded-pill border fs-4 bg-primary text-white py-1 px-2 bi bi-hospital-fill"></i>
-            <section class="p-4">
+            <form th:object="${hospital}" method="post" action="/hospital/add" class="p-4">
                 
                 <section class="row col-sm-12 m-auto">
                 <div class="mb-3">
                 <span  class="form-span">Name</span>
-                    <input type="text" name="name"  class="form-control rounded-0" placeholder="Enter Hospital  ..." />
+                    <input type="text" th:field="*{name}"  class="form-control rounded-0" placeholder="Enter Hospital  ..." />
                 </div>
                 <div class="mb-3 col-sm-6">
                     <span >Select Province</span>
-                    <select class="form-select text-center rounded-0" required>
+                    <select class="form-select text-center rounded-0" id="select-province" required>
                     <option value="">--Select province--</option>
-                             <option key={index} value={data.id}>{data.name}</option>
+                        <option th:each="province:${provinceList}" th:value="${province.id}" th:text="${province.name}"></option>
                     </select>
                 </div>
                 <div class="mb-3 col-sm-6">
                     <span >Select District</span>
-                    <select class="form-select text-center rounded-0" required>
+                    <select class="form-select text-center rounded-0" id="select-district" required>
                         <option value="">--Select District--</option>
                     </select>
                 </div>
                 <div class="mb-3 col-sm-12">
                     <span >Select sector</span>
-                    <select class="form-select text-center rounded-0" required>
+                    <select class="form-select text-center rounded-0" th:field="*{location}" id="select-sector" required>
                         <option value="">--Select sector--</option>
                          
                     </select>
@@ -37,9 +38,47 @@
                 </section>
                 <div class="modal-footer">
                     <a class="btn btn-primary mx-3 rounded-0" href="/admin">close</a>
-                     <button  class="btn btn-info fw-bolder">Add Hospital</button>
+                     <button  class="btn btn-info fw-bolder" type="submit">Add Hospital</button>
                 </div>
             </section>
        </div>
     </div>
 </div>
+<script>
+    document.getElementById("select-province").addEventListener('change',()=>{
+    var provinceId=document.getElementById('select-province').value;
+    var districtOption=document.getElementById('select-district');
+    fetchOptions(provinceId,districtOption);
+});
+document.getElementById("select-district").addEventListener('change',()=>{
+    var provinceId=document.getElementById('select-district').value;
+    var districtOption=document.getElementById('select-sector');
+    fetchOptions(provinceId,districtOption);
+});
+function populateOptions(options,selectElement) {
+
+            options.forEach(function(option) {
+                var optionElement = document.createElement('option');
+                optionElement.value = option.id;
+                optionElement.textContent = option.name;
+                selectElement.appendChild(optionElement);
+            });
+        }
+function fetchOptions(locatonid,selectElement) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var options = JSON.parse(xhr.responseText);
+                        console.log(options);
+                        populateOptions(options,selectElement);
+                    } else {
+                        console.error('Failed to fetch options');
+                    }
+                }
+            };
+            
+            xhr.open('POST', '/api/location/'+locatonid, true);
+            xhr.send();
+}
+</script>
