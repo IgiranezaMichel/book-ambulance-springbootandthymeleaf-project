@@ -1,0 +1,44 @@
+
+<head th:replace="index::head"></head>
+<main class="overflow-auto col-sm-12 m-auto" style="
+        width:100%;height:100%;
+        background-Image:url(/img/user/hospital-van.jpeg);background-size:cover;
+        background-attachment:fixed;
+        background-repeat:no-repeat;background-position:center center">
+        <nav class="navbar navbar-expand-md navbar-info sticky-top mb-4"  style="background-color:rgb(50,10,20,.8)">
+            <a class="navbar-brand mx-2" href='/'>
+                <img  src="/img/icon/hospital.png" width="100" alt="" />
+            </a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"  data-bs-target="#collapsibleNavId"  aria-controls="collapsibleNavId"  aria-expanded="false"  aria-label="Toggle navigation"></button>
+            <div class="collapse navbar-collapse container" id="collapsibleNavId">
+                <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-a hover-me active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+            <i class="bi bi-house-door-fill display-6"></i>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-a hover-me p-4 hover-me rounded-pill" id="hospital-tab" data-bs-toggle="pill" data-bs-target="#hospital" type="button" role="tab" aria-controls="hospital" aria-selected="false">
+            <img src="/img/parchment.png" width="70" alt="" />
+            </button>
+          </li>
+        </ul>
+        </ul>
+        <div><i class="bi bi-person-fill text-white"></i> <span th:text="${user.name}" class="text-white fw-bolder"></span></div>
+          <form th:action="@{'/logout'}" method="post">
+            <button type="submit" class="bg-transparent border-0"><i class="bi bi-box-arrow-in-left btn btn-secondary mx-3"></i></button>
+          </form>
+            </div>
+        </nav>
+        <section>
+            <div class="tab-content overflow-auto" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div th:replace="driver/home::bookingList"></div>
+            </div>
+            <div class="tab-pane fade" id="hospital" role="tabpanel" aria-labelledby="hospital-tab">
+                <!-- <div th:replace="user/history::home"></div> -->
+            </div>
+            </div>
+        </section>
+</main>
